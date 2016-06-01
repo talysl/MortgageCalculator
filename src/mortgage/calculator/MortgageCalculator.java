@@ -20,7 +20,7 @@ public class MortgageCalculator {
     
     //instance variables
     private double interestRate,
-            mp;
+            mpd;
     private int pa, lengthYears;
     
     //constructor
@@ -47,26 +47,22 @@ public class MortgageCalculator {
 	public void calculation(){
 		//processing
             
-                //converting interest rate to a decimal
-                double ir = interestRate/100.0;
-                 System.out.println(ir);
+                //converting interest rate to a decimal and dividing by months
+                double mi = interestRate/100.0/12.0;
                 
-                //interest rate by month and length in months
-                double mi = ir/12.0;
+                //length in months
                 int lm = lengthYears*12;
-                System.out.println(lm);
                 
                 //final result
-                //118.50307
-                //double bump = (mi*Math.pow(1+mi, lm))/(Math.pow(1+mi, lm)-1);
-                //System.out.println(bump); //0.0165728878934725
-                //mp = pa*bump;
-                mp = (pa*mi)/(1-Math.pow(1+mi,-lm));
+                double mp = (pa*mi)/(1-Math.pow(1+mi,-lm));
+                
+                //rounding
+                mpd =(double)Math.round(mp);
 	}
     	
 	//getter method for getting/retrieving computation
-	public double getMp(){
-		return mp;
+	public double getMpd(){
+		return mpd;
 	}	
     
     public static void main(String[] args) {      
